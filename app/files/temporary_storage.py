@@ -33,13 +33,15 @@ class TemporaryFileStorage:
             copied_bytes = 0
 
             try:
-                with file.path.open("rb") as source:
-                    with temporary_path.open("xb") as target:
-                        while chunk := source.read(64 * 1_024):
-                            copied_bytes += len(chunk)
-                            if copied_bytes > self._max_size_bytes:
-                                raise FileSizeError("Файл изменился и превысил лимит.")
-                            target.write(chunk)
+                with (
+                    file.path.open("rb") as source,
+                    temporary_path.open("xb") as target,
+                ):
+                    while chunk := source.read(64 * 1_024):
+                        copied_bytes += len(chunk)
+                        if copied_bytes > self._max_size_bytes:
+                            raise FileSizeError("Файл изменился и превысил лимит.")
+                        target.write(chunk)
             except FileSizeError:
                 raise
             except OSError as error:

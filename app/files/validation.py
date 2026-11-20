@@ -35,11 +35,11 @@ FILE_RULES: dict[str, FileRule] = {
     ".pdf": FileRule(FileKind.PDF, ("application/pdf",)),
     ".docx": FileRule(
         FileKind.DOCX,
-        ("application/vnd.openxmlformats-officedocument." "wordprocessingml.document",),
+        ("application/vnd.openxmlformats-officedocument.wordprocessingml.document",),
     ),
     ".xlsx": FileRule(
         FileKind.XLSX,
-        ("application/vnd.openxmlformats-officedocument." "spreadsheetml.sheet",),
+        ("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",),
     ),
     ".png": FileRule(FileKind.PNG, ("image/png",)),
     ".jpg": FileRule(FileKind.JPEG, ("image/jpeg",)),

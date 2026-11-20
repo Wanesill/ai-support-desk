@@ -45,7 +45,7 @@ class DocxDocumentExtractor:
             raise DocumentReadError("Не удалось прочитать DOCX.") from error
 
         warnings = [
-            "Для DOCX номера страниц не определяются: " "сохранены ссылки на разделы."
+            "Для DOCX номера страниц не определяются: сохранены ссылки на разделы."
         ]
         if table_found:
             warnings.append("Таблицы DOCX преобразованы в обычный текст.")

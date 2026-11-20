@@ -30,17 +30,21 @@ def test_storage_creates_and_removes_file(tmp_path: Path) -> None:
 def test_storage_rejects_empty_file(tmp_path: Path) -> None:
     storage = UploadedFileStorage(root=tmp_path, max_size_bytes=100)
 
-    with pytest.raises(UploadedFileEmptyError, match="Пустой файл"):
-        with storage.stage(BytesIO(b""), "empty.txt"):
-            pass
+    with (
+        pytest.raises(UploadedFileEmptyError, match="Пустой файл"),
+        storage.stage(BytesIO(b""), "empty.txt"),
+    ):
+        pass
 
 
 def test_storage_rejects_large_file_and_cleans_directory(tmp_path: Path) -> None:
     storage = UploadedFileStorage(root=tmp_path, max_size_bytes=3)
 
-    with pytest.raises(UploadedFileSizeError, match="превышает"):
-        with storage.stage(BytesIO(b"1234"), "large.txt"):
-            pass
+    with (
+        pytest.raises(UploadedFileSizeError, match="превышает"),
+        storage.stage(BytesIO(b"1234"), "large.txt"),
+    ):
+        pass
 
     assert list(tmp_path.iterdir()) == []
 

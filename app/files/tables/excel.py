@@ -60,7 +60,7 @@ class ExcelTableExtractor:
 
         warnings = ()
         if sheet_name is None:
-            warnings = (f"Автоматически выбран первый лист: " f"{selected_sheet}.",)
+            warnings = (f"Автоматически выбран первый лист: {selected_sheet}.",)
 
         return build_extracted_table(
             file=file,
